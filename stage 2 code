@@ -1,0 +1,31 @@
+###### Description ######
+### Reads 9 symbols from the input and writes an appropriate 3x3 field. 
+Elements of the field can contain only 'X', 'O' and '_' symbols.
+Sets the field to a specific grid format ### 
+
+
+
+######### Stage 2 CODE ######### 
+
+# Setting out the tic tac toe grid to output every time a new move is entered
+grid = input() 
+print("---------") 
+print("| " + grid[0] + " " + grid[1] + " " + grid[2] + " |") 
+print("| " + grid[3] + " " + grid[4] + " " + grid[5] + " |") 
+print("| " + grid[6] + " " + grid[7] + " " + grid[8] + " |") 
+print("---------") 
+
+
+
+
+###### Example of how it looks from users end #######
+
+# User Input 
+Enter cells: > O_OXXO_XX   
+
+# Program Output
+---------   
+| O _ O |
+| X X O |
+| _ X X |
+--------- 
