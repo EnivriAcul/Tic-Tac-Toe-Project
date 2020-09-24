@@ -1,0 +1,164 @@
+# 1: Taking input for the game as a string
+grid = input()
+
+# 2: Printing what the current state of the field looks like depending on the input
+print("-" * 9)
+print("| " + grid[0] + " " + grid[1] + " " + grid[2] + " |")
+print("| " + grid[3] + " " + grid[4] + " " + grid[5] + " |")
+print("| " + grid[6] + " " + grid[7] + " " + grid[8] + " |")
+print("-" * 9)
+
+# 3: Analysing what is on the field to understand where in the game we are at
+# (whether someone has won or lost etc.)
+
+    # 3a: Checking whether a certain board state is impossible or not
+
+        # 3a_i: Checking that there aren't two winning lines on the board at the same time
+if ((((grid[0] == 'X' and grid[1] == 'X' and grid[2] == 'X')   # 3 X's in row 1
+    or (grid[3] == 'X' and grid[4] == 'X' and grid[5] == 'X')   # 3 X's in row 2
+        or (grid[6] == 'X' and grid[7] == 'X' and grid[8] == 'X')   # 3 X's in row 3
+        or (grid[0] == 'X' and grid[3] == 'X' and grid[6] == 'X')   # 3 X's in column 1
+        or (grid[1] == 'X' and grid[4] == 'X' and grid[7] == 'X')   # 3 X's in column 2
+        or (grid[2] == 'X' and grid[5] == 'X' and grid[8] == 'X')   # 3 X's in column 3
+        or (grid[0] == 'X' and grid[4] == 'X' and grid[8] == 'X')   # 3 X's diagonal top left to bottom right
+        or (grid[2] == 'X' and grid[4] == 'X' and grid[6] == 'X'))
+    and ((grid[0] == 'O' and grid[1] == 'O' and grid[2] == 'O')   # 3 O's in row 1
+         or (grid[3] == 'O' and grid[4] == 'O' and grid[5] == 'O')   # 3 O's in row 2
+         or (grid[6] == 'O' and grid[7] == 'O' and grid[8] == 'O')   # 3 O's in row 3
+         or (grid[0] == 'O' and grid[3] == 'O' and grid[6] == 'O')   # 3 O's in column 1
+         or (grid[1] == 'O' and grid[4] == 'O' and grid[7] == 'O')   # 3 O's in column 2
+         or (grid[2] == 'O' and grid[5] == 'O' and grid[8] == 'O')   # 3 O's in column 3
+         or (grid[0] == 'O' and grid[4] == 'O' and grid[8] == 'O')   # 3 O's diagonal top left to bottom right
+         or (grid[2] == 'O' and grid[4] == 'O' and grid[6] == 'O')))  # 3 O's diagonal top right to bottom left
+        # 3a_ii: Checking that any player is no more than one move ahead of their opponent
+    or (grid.count('X') > (grid.count('O') + 1))
+        or (grid.count('O') > (grid.count('X') + 1))):
+    print("Impossible")
+
+    # 3b: Checking whether we have a winning line on the board.
+        # 3b_i: Checking whether we have a winning line of X's
+elif ((grid[0] == 'X' and grid[1] == 'X' and grid[2] == 'X')   # 3 X's in row 1
+      or (grid[3] == 'X' and grid[4] == 'X' and grid[5] == 'X')   # 3 X's in row 2
+        or (grid[6] == 'X' and grid[7] == 'X' and grid[8] == 'X')   # 3 X's in row 3
+        or (grid[0] == 'X' and grid[3] == 'X' and grid[6] == 'X')   # 3 X's in column 1
+        or (grid[1] == 'X' and grid[4] == 'X' and grid[7] == 'X')   # 3 X's in column 2
+        or (grid[2] == 'X' and grid[5] == 'X' and grid[8] == 'X')   # 3 X's in column 3
+        or (grid[0] == 'X' and grid[4] == 'X' and grid[8] == 'X')   # 3 X's diagonal top left to bottom right
+        or (grid[2] == 'X' and grid[4] == 'X' and grid[6] == 'X')):   # 3 X's diagonal top right to bottom left
+    print("X wins")
+        # 3b_ii: Checking whether we have a winning line of O's.
+elif ((grid[0] == 'O' and grid[1] == 'O' and grid[2] == 'O')   # 3 O's in row 1
+      or (grid[3] == 'O' and grid[4] == 'O' and grid[5] == 'O')   # 3 O's in row 2
+        or (grid[6] == 'O' and grid[7] == 'O' and grid[8] == 'O')   # 3 O's in row 3
+        or (grid[0] == 'O' and grid[3] == 'O' and grid[6] == 'O')   # 3 O's in column 1
+        or (grid[1] == 'O' and grid[4] == 'O' and grid[7] == 'O')   # 3 O's in column 2
+        or (grid[2] == 'O' and grid[5] == 'O' and grid[8] == 'O')   # 3 O's in column 3
+        or (grid[0] == 'O' and grid[4] == 'O' and grid[8] == 'O')   # 3 O's diagonal top left to bottom right
+        or (grid[2] == 'O' and grid[4] == 'O' and grid[6] == 'O')):   # 3 O's diagonal top right to bottom left
+    print("O wins")
+
+    # 3c: Checking whether we have a draw or not
+elif '_' not in grid:
+    print("Draw")
+
+    # 3d: Checking whether the game is still in progress or not
+elif '_' in grid:
+    print('Game not finished')
+    
+    
+    
+# Examples: 
+
+# 1
+# Enter cells: > XXXOO__O_
+# Output:
+# ---------
+# | X X X |
+# | O O _ |
+# | _ O _ |
+# ---------
+# X wins
+
+
+
+# 2 
+# Enter cells: > XOXOXOXXO
+# Output:
+# ---------
+# | X O X |
+# | O X O |
+# | X X O |
+# ---------
+# X wins
+
+
+
+# 3 
+# Enter cells: > XOOOXOXXO
+# Output:
+# ---------
+# | X O O |
+# | O X O |
+# | X X O |
+# ---------
+# O wins
+
+
+
+# 4 
+# Enter cells: > XOXOOXXXO
+# Output:
+# ---------
+# | X O X |
+# | O O X |
+# | X X O |
+# ---------
+# Draw
+
+
+
+# 5 
+# Enter cells: > XO_OOX_X_
+# Output:
+# ---------
+# | X O   |
+# | O O X |
+# |   X   |
+# ---------
+# Game not finished
+
+
+
+# 6 
+# Enter cells: > XO_XO_XOX
+# Output:
+# ---------
+# | X O _ |
+# | X O _ |
+# | X O X |
+# ---------
+# Impossible
+
+
+
+# 7 
+# Enter cells: > _O_X__X_X
+# Output: 
+# ---------
+# |   O   |
+# | X     |
+# | X   X |
+# ---------
+# Impossible
+
+
+
+# 8 
+# Enter cells: > _OOOO_X_X
+# Output:
+# ---------
+# |   O O |
+# | O O   |
+# | X   X |
+# ---------
+# Impossible
